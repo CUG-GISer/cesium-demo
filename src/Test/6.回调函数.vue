@@ -34,6 +34,8 @@ async function createViewer1() {
         endLongitude =
           startLongitude +
           0.001 * Cesium.JulianDate.secondsDifference(time, startTime);
+
+        //返回给定的经度和纬度值数组（以度为单位），该数组由Cartesian3位置组成。
         return Cesium.Cartesian3.fromDegreesArray(
           [startLongitude, startLatitude, endLongitude, startLatitude],
           Cesium.Ellipsoid.WGS84,
@@ -53,6 +55,8 @@ async function createViewer1() {
   // use scratch object to avoid new allocations per frame.
   let endCartographic = new Cesium.Cartographic();
   const scratch = new Cesium.Cartographic();
+
+  //在连接两个提供的行星点的椭球上初始化一个测地线。
   const geodesic = new Cesium.EllipsoidGeodesic();
 
   // Calculate the length of the line
@@ -61,7 +65,10 @@ async function createViewer1() {
     const endPoint = redLine.polyline.positions.getValue(time, result)[1];
     endCartographic = Cesium.Cartographic.fromCartesian(endPoint);
 
+    //设置测地线的起点和终点
     geodesic.setEndPoints(startCartographic, endCartographic);
+
+    //获取起点和终点之间的表面距离
     const lengthInMeters = Math.round(geodesic.surfaceDistance);
     return `${(lengthInMeters / 1000).toFixed(1)} km`;
   }
@@ -72,10 +79,14 @@ async function createViewer1() {
     endCartographic = Cesium.Cartographic.fromCartesian(endPoint);
 
     geodesic.setEndPoints(startCartographic, endCartographic);
+
+    //提供沿测地线在指示部分处的点的位置。
     const midpointCartographic = geodesic.interpolateUsingFraction(
-      0.5,
-      scratch
+      0.5,  //起点和终点之间的距离的一部分。
+      scratch  //存储结果的对象。
     );
+
+    //什么时候用弧度什么时候用经纬度
     return Cesium.Cartesian3.fromRadians(
       midpointCartographic.longitude,
       midpointCartographic.latitude
