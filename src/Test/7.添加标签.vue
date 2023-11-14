@@ -80,6 +80,8 @@ function updatePosition(time, result) {
 
   let height;
   if (scene.sampleHeightSupported) {
+    //返回给定制图位置处场景几何的高度；如果没有，则返回 undefined 场景几何要从其采样高度。
+    //输入位置的高度被忽略。可用于将物体夹在地球，3D瓷砖或场景中的图元。
     height = scene.sampleHeight(cartographic, objectsToExclude);
     
   }

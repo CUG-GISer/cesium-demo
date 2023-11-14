@@ -5,7 +5,9 @@
   <!-- <DrawModel></DrawModel> //绘制模型-->
   <!-- <modelCzml></modelCzml> //卫星模型 -->
   <!-- <CallbackProperty></CallbackProperty> //回调函数-->
-  <ClampTo3DModel></ClampTo3DModel>
+  <!-- <ClampTo3DModel></ClampTo3DModel> //添加标签-->
+  <!-- <CameraTutorial></CameraTutorial> //移动相机-->
+  <Band></Band>
 </template>
 
 <script setup>
@@ -16,6 +18,8 @@ import DrawModel from "../src/Test/4.绘制模型.vue"
 import modelCzml from "../src/Test/5.卫星轨迹.vue"
 import CallbackProperty from "../src/Test/6.回调函数.vue"
 import ClampTo3DModel from "../src/Test/7.添加标签.vue"
+import CameraTutorial from "../src/Test/9.移动相机.vue"
+import Band from "../src/Test/10.波带.vue"
 const components = [
   chooseFeature,
   MOdel_Coloring,
@@ -24,6 +28,8 @@ const components = [
   modelCzml,
   CallbackProperty,
   ClampTo3DModel,
+  CameraTutorial,
+  Band,
 ]
 </script>
 <style scoped></style>
